@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="InputActivity">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarInput"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvInputName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_name_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/edInputName"
+            app:layout_constraintEnd_toStartOf="@+id/edInputName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            tools:text="Name" />
+
+        <EditText
+            android:id="@+id/edInputName"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/input_activity_edit_text_height"
+            android:layout_marginTop="116dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvInputAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_address_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/edInputAddress"
+            app:layout_constraintEnd_toStartOf="@+id/edInputAddress"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvInputName"
+            tools:text="Address" />
+
+        <EditText
+            android:id="@+id/edInputAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:inputType="textMultiLine"
+            android:maxLength="60"
+            android:maxLines="3"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edInputName" />
+
+        <TextView
+            android:id="@+id/tvInputEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_email_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/edInputEmail"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            tools:text="Email" />
+
+        <EditText
+            android:id="@+id/edInputEmail"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/input_activity_edit_text_height"
+            android:layout_marginTop="@dimen/margin_8"
+            android:inputType="textEmailAddress"
+            android:maxLength="30"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edInputAddress" />
+
+        <TextView
+            android:id="@+id/tvInputStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_8"
+            android:text="@string/tv_starttime_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/edStartTime"
+            app:layout_constraintEnd_toStartOf="@+id/edStartTime"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvInputEmail"
+            tools:text="Start time" />
+
+        <EditText
+            android:id="@+id/edStartTime"
+            android:layout_width="@dimen/ed_time_width"
+            android:layout_height="@dimen/input_activity_edit_text_height"
+            android:layout_marginTop="8dp"
+            android:focusable="false"
+            android:inputType="time"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+
+        <TextView
+            android:id="@+id/tvInputEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_8"
+            android:text="@string/tv_endtime_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/edEndTime"
+            app:layout_constraintEnd_toStartOf="@+id/edEndTime"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvInputStartTime"
+            tools:text="End Time" />
+
+        <EditText
+            android:id="@+id/edEndTime"
+            android:layout_width="@dimen/ed_time_width"
+            android:layout_height="@dimen/input_activity_edit_text_height"
+            android:layout_marginTop="@dimen/margin_8"
+            android:focusable="false"
+            android:inputType="time"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edStartTime" />
+
+        <TextView
+            android:id="@+id/tvInputPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_phone_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/edPhone"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            tools:text="Phone" />
+
+        <EditText
+            android:id="@+id/edPhone"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/input_activity_edit_text_height"
+            android:layout_marginTop="@dimen/margin_8"
+            android:inputType="phone"
+            android:maxLength="30"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edEndTime" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <Button
+            android:id="@+id/btnInputSave"
+            style="@style/InputImageButtonSave"
+            android:layout_marginTop="56dp"
+            android:contentDescription="@string/btn_save"
+            android:onClick="save"
+            android:text="@string/btn_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/edPhone"
+            app:layout_constraintVertical_bias="0.895"
+            tools:text="Save" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="100dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <ImageButton
+            android:id="@+id/imgbtnTimeStart"
+            style="@style/InputImageButtonTime"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/tv_starttime_label"
+            android:src="@drawable/ic_access_time_black_24dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintStart_toEndOf="@+id/edStartTime"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+
+        <ImageButton
+            android:id="@+id/imgbtnTimeEnd"
+            style="@style/InputImageButtonTime"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/tv_endtime_label"
+            android:src="@drawable/ic_access_time_black_24dp"
+            app:layout_constraintBottom_toTopOf="@+id/edPhone"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintStart_toEndOf="@+id/edEndTime"
+            app:layout_constraintTop_toBottomOf="@+id/imgbtnTimeStart" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

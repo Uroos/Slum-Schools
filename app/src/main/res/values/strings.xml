@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Slum Schools</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="add_marker">Add a location</string>
+    <string name="about">About</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="logout">Log out</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="error_message">You are offline.</string>
+
+    <!-- Details Activity and Input Activity-->
+    <string name="key_name">name</string>
+    <string name="key_address">address</string>
+    <string name="key_email">email</string>
+    <string name="key_starttime">starttime</string>
+    <string name="key_endtime">endtime</string>
+    <string name="key_phone">phone</string>
+    <string name="key_latitude">latitude</string>
+    <string name="key_longitude">longitude</string>
+    <string name="key_uid">uid</string>
+    <string name="key_bundle_school">school</string>
+
+    <string name="tv_name_label">Name</string>
+    <string name="tv_address_label">Address</string>
+    <string name="tv_email_label">Email</string>
+    <string name="tv_starttime_label">Start time</string>
+    <string name="tv_endtime_label">End time</string>
+    <string name="tv_phone_label">Phone</string>
+
+    <string name="btn_save">Save</string>
+
+    <!-- Details Activity and Input Activity-->
+    <string name="tv_about">Through this app we aspire to connect two different categories of people
+                            that are bonded by their shared love for spreading education. There are people
+                            trying their best to make a difference by running schools
+                            for the underprivileged in whatever setting convenient for them like
+                            a street or a park. The other group wants to volunteer in the schools
+                            but has no way of knowing the whereabouts except through word of mouth.</string>
+
+    <!-- Content Descriptions-->
+    <string name="content_description_call">call</string>
+    <string name="content_description_email">send mail</string>
+    <string name="content_description_like">like</string>
+
+</resources>
+

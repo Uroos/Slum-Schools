@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/widget_linear_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/logo_without_name"
+android:padding="@dimen/widget_margin">
+
+<TextView
+    android:id="@+id/widget_name"
+    style="@style/WidgetTheme"
+    tools:text="School Name " />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/widget_name"
+    android:layout_marginTop="0dp"
+    android:alpha="0.8"
+    android:background="@color/browser_actions_bg_grey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/margin_24">
+
+        <TextView
+            style="@style/WidgetLabelsTheme"
+            android:text="Address" />
+
+        <TextView
+            android:id="@+id/widget_address"
+            style="@style/WidgetDetailTheme"
+            tools:text="Address will go here " />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/WidgetLabelsTheme"
+            android:text="Email" />
+
+        <TextView
+            android:id="@+id/widget_email"
+            style="@style/WidgetDetailTheme"
+            tools:text="abcdefg@gmail.com" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/WidgetLabelsTheme"
+            android:text="Start time" />
+
+        <TextView
+            android:id="@+id/widget_start_time"
+            style="@style/WidgetDetailTheme"
+            tools:text="Start time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/WidgetLabelsTheme"
+            android:text="End time" />
+
+        <TextView
+            android:id="@+id/widget_end_time"
+            style="@style/WidgetDetailTheme"
+            tools:text="End time" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryText"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textSize="56sp"
+        tools:text="2700796" />
+</LinearLayout>
+</RelativeLayout>
