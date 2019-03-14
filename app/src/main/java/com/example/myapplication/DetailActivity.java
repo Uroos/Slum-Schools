@@ -1,10 +1,11 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,8 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.myapplication.utils.Utils.subject;
 import static com.example.myapplication.utils.Utils.body;
+import static com.example.myapplication.utils.Utils.subject;
 
 public class DetailActivity extends AppCompatActivity {
     private String name;
@@ -39,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView tvEndTime;
     @BindView(R.id.tvDetailPhone)
     TextView tvPhone;
+    AnimatedVectorDrawable backToMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +52,13 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbarInput);
         toolbar.setTitleTextColor(0xFFFFFFFF);
         setSupportActionBar(toolbar);
-        // Now add the button that opens the navigation drawer.
+        // Now add the back arrow.
         // Enable the app bar's "home" button by calling setDisplayHomeAsUpEnabled(true)
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+       actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        //actionbar.setHomeAsUpIndicator(backToMenu);
+        //backToMenu.start();
 
         if (savedInstanceState == null) {
             if (getIntent() != null) {
@@ -117,6 +121,8 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, "Liked!", Toast.LENGTH_SHORT).show();
         School school = new School(name, address, email, startTime, endTime, phone, 0, 0);
         SchoolUpdateService.startSchoolUpdate(this, school);
+       // backToMenu.start();
+
     }
 
     @Override

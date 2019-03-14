@@ -34,17 +34,26 @@
     <string name="btn_save">Save</string>
 
     <!-- Details Activity and Input Activity-->
-    <string name="tv_about">Through this app we aspire to connect two different categories of people
-                            that are bonded by their shared love for spreading education. There are people
-                            trying their best to make a difference by running schools
+    <string name="tv_about"> There are people trying their best to spread education by running schools
                             for the underprivileged in whatever setting convenient for them like
-                            a street or a park. The other group wants to volunteer in the schools
-                            but has no way of knowing the whereabouts except through word of mouth.</string>
+                            a street or a park. There are volunteers who want to participate
+                            but have no way of knowing the whereabouts of the school except through word of mouth.
+                            Through this app we aspire to connect these two groups.</string>
 
     <!-- Content Descriptions-->
     <string name="content_description_call">call</string>
     <string name="content_description_email">send mail</string>
     <string name="content_description_like">like</string>
+
+    <!-- Paths for transitions-->
+    <!--<string name="path_menu">M3,18h18v-2L3,16v2zM3,13h18v-2L3,11v2zM3,6v2h18L21,6L3,6z</string>-->
+    <string name="path_menu">M 3.0,18.0 h 18.0 v -2.0 L 3.0,16.0 v 2.0 L 3.0,18.0 M 3.0,13.0 h 18.0 v -2.0 H 21.0 l 0.0,0.0 L 3.0,11.0 v 2.0 l 0.0,0.0 l 0.0,0.0 l 0.0,0.0 L 3.0,13.0 M 3.0,6.0 H 3.0 v 2.0 h 18.0 L 21.0,6.0 L 3.0,6.0 </string>
+    <!--<string name="path_back">M20,11H7.83l5.59,-5.59L12,4l-8,8 8,8 1.41,-1.41L7.83,13H20v-2z</string>-->
+    <string name="path_back">M 0.0,0.0 h 0.0 v 0.0 L 0.0,0.0 v 0.0 L 0.0,0.0 M 20.0,11.0 h 0.0 v 0.0 H 7.83 l 5.59,-5.59 L 12.0,4.0 v 0.0 l -8.0,8.0 l 8.0,8.0 l 1.41,-1.41 L 7.83,13.0 M 7.83,13.0 H 20.0 v -2.0 h 0.0 L 20.0,11.0 L 20.0,11.0 </string>
+    <string name="tick">tick</string>
+    <string name="cross">cross</string>
+    <string name="groupTickCross">groupTickCross</string>
+    <integer name="duration">450</integer>
 
 </resources>
 

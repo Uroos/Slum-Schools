@@ -52,10 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/colorText"
         android:elevation="@dimen/nav_drawer_elevation"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        android:background="@color/colorText"
         app:itemBackground="@drawable/nav_background"
         app:itemTextColor="@color/colorPrimaryDark"
         app:menu="@menu/drawer_view" />

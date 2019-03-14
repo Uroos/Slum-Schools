@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,7 +34,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -66,10 +66,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final String TAG = MapsActivity.class.getName();
     private static final int MY_PERMISSION_REQUEST_FINE_LOCATION = 101;
-    private static final String MAPVIEW_BUNDLE_KEY="MapViewKey";
+    private static final String MAPVIEW_BUNDLE_KEY = "MapViewKey";
 
     // To limit the calls to get current location
-    private static int once=0;
+    private static int once = 0;
 
     private List<School> schools;
 
@@ -96,14 +96,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         ButterKnife.bind(this);
+
+       // AnimatedVectorDrawable menuToBack = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_menu_to_back);
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
         Bundle mapViewBundle = null;
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
         // This arraylist will contain all the markers downloaded from the database.
@@ -118,7 +122,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Enable the app bar's "home" button by calling setDisplayHomeAsUpEnabled(true)
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+       actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        //actionbar.setHomeAsUpIndicator(menuToBack);
+        //menuToBack.start();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -145,8 +151,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             user = FirebaseAuth.getInstance().getCurrentUser();
         }
 
-        if(once==0) {
-            once=1;
+        // Run this part only when activity starts for the first time. This sets the camera on user
+        // location when app is first opened and permission is given. We don't want this code running
+        // at every rotation of the phone, as we want to preserve the state of the map.
+        if (once == 0) {
+            once = 1;
             if (isOnline(this)) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -156,7 +165,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 currentLatitude = location.getLatitude();
                                 currentLongitude = location.getLongitude();
                                 currentLatLng = new LatLng(currentLatitude, currentLongitude);
-                                // once ensures that only the first time camera zooms in to the current location
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 10));
                                 //Log.v(TAG, "On current latitude is: " + location.getLatitude());
                             }
@@ -225,6 +233,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -236,7 +245,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (grantResults.length > 0
                         && grantResults[0]
                         == PackageManager.PERMISSION_GRANTED) {
-                   enableMyLocation();
+                    enableMyLocation();
                     break;
                 }
         }
@@ -247,7 +256,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            if(once==1) {
+            if (once == 1) {
                 once = 2;
                 mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -266,10 +275,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             Log.v(MapsActivity.this.getClass().getName(), "On Location is allowed");
 
-        }else{
+        } else {
             mMap.setMyLocationEnabled(false);
         }
     }
+
     // Attaching Auth State listener
     @Override
     protected void onPostResume() {
@@ -283,6 +293,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             firebaseAuth.addAuthStateListener(authStateListener);
         }
     }
+
     // Input Screen is opened for user to enter details about the school.
     private void launchInputScreen(LatLng latLng) {
         Intent intent = new Intent(this, InputActivity.class);
@@ -402,9 +413,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Bundle bundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
-        if(bundle==null){
-            bundle=new Bundle();
-            outState.putBundle(MAPVIEW_BUNDLE_KEY,bundle);
+        if (bundle == null) {
+            bundle = new Bundle();
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, bundle);
         }
         mapFragment.onSaveInstanceState(bundle);
     }
@@ -464,7 +475,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //start login screen if user is not logged in else dismiss to go back to maps
                 //Toast.makeText(this, "add marker is pressed", Toast.LENGTH_SHORT).show();
                 //Timber.v("add marker is pressed");
-                once=0;
+                once = 0;
                 if (isOnline(this)) {
                     if (user == null) {
                         startSignInFlow();
