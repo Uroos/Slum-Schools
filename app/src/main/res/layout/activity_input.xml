@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toStartOf="@+id/edInputName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            tools:text="Name" />
+            tools:text="@string/tv_name_label" />
 
         <EditText
             android:id="@+id/edInputName"
@@ -56,7 +56,7 @@
             app:layout_constraintEnd_toStartOf="@+id/edInputAddress"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvInputName"
-            tools:text="Address" />
+            tools:text="@string/tv_address_label" />
 
         <EditText
             android:id="@+id/edInputAddress"
@@ -79,7 +79,7 @@
             android:text="@string/tv_email_label"
             app:layout_constraintBaseline_toBaselineOf="@+id/edInputEmail"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            tools:text="Email" />
+            tools:text="@string/tv_email_label" />
 
         <EditText
             android:id="@+id/edInputEmail"
@@ -94,6 +94,48 @@
             app:layout_constraintTop_toBottomOf="@+id/edInputAddress" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_dayopen_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            tools:text="@string/tv_dayopen_label" />
+
+        <Spinner
+            android:id="@+id/spinnerFrom"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/margin_8"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerTo"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:text="@string/tv_to_label"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerFrom"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerTo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/spinnerFrom"
+            app:layout_constraintTop_toTopOf="@+id/spinnerFrom"
+            tools:text="@string/tv_to_label" />
+
+        <Spinner
+            android:id="@+id/spinnerTo"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/margin_8"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+
+        <TextView
             android:id="@+id/tvInputStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,17 +146,17 @@
             app:layout_constraintEnd_toStartOf="@+id/edStartTime"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvInputEmail"
-            tools:text="Start time" />
+            tools:text="@string/tv_starttime_label" />
 
         <EditText
             android:id="@+id/edStartTime"
             android:layout_width="@dimen/ed_time_width"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_8"
             android:focusable="false"
             android:inputType="time"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerFrom" />
 
         <TextView
             android:id="@+id/tvInputEndTime"
@@ -127,7 +169,7 @@
             app:layout_constraintEnd_toStartOf="@+id/edEndTime"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvInputStartTime"
-            tools:text="End Time" />
+            tools:text="@string/tv_endtime_label" />
 
         <EditText
             android:id="@+id/edEndTime"
@@ -146,7 +188,7 @@
             android:text="@string/tv_phone_label"
             app:layout_constraintBaseline_toBaselineOf="@+id/edPhone"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            tools:text="Phone" />
+            tools:text="@string/tv_phone_label" />
 
         <EditText
             android:id="@+id/edPhone"
@@ -200,11 +242,11 @@
             android:id="@+id/imgbtnTimeStart"
             style="@style/InputImageButtonTime"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="56dp"
             android:contentDescription="@string/tv_starttime_label"
             android:src="@drawable/ic_access_time_black_24dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintStart_toEndOf="@+id/edStartTime"
             app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
 
@@ -212,8 +254,8 @@
             android:id="@+id/imgbtnTimeEnd"
             style="@style/InputImageButtonTime"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
             android:contentDescription="@string/tv_endtime_label"
             android:src="@drawable/ic_access_time_black_24dp"
             app:layout_constraintBottom_toTopOf="@+id/edPhone"

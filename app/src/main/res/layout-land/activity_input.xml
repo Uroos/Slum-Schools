@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -92,6 +93,42 @@
             app:layout_constraintTop_toBottomOf="@+id/edInputAddress" />
 
         <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_dayopen_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            tools:text="@string/tv_dayopen_label" />
+
+        <Spinner
+            android:id="@+id/spinnerFrom"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_to_label"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerFrom"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerTo"
+            app:layout_constraintStart_toEndOf="@+id/spinnerFrom"
+            app:layout_constraintTop_toTopOf="@+id/spinnerFrom"
+            tools:text="@string/tv_to_label" />
+
+        <Spinner
+            android:id="@+id/spinnerTo"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="232dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+        <TextView
             android:id="@+id/tvInputStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,13 +145,13 @@
             android:id="@+id/edStartTime"
             android:layout_width="@dimen/ed_time_width"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="8dp"
             android:focusable="false"
             android:inputType="time"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnTimeStart"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerFrom" />
 
         <TextView
             android:id="@+id/tvInputEndTime"
@@ -177,15 +214,14 @@
         <Button
             android:id="@+id/btnInputSave"
             style="@style/InputImageButtonSave"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_40"
-            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginEnd="88dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="@string/btn_save"
             android:onClick="save"
             android:text="@string/btn_save"
-            app:layout_constraintBottom_toTopOf="@+id/edPhone"
+            app:layout_constraintBottom_toBottomOf="@+id/imgbtnTimeEnd"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail"
+            app:layout_constraintTop_toTopOf="@+id/imgbtnTimeStart"
             tools:text="Save" />
 
         <android.support.constraint.Guideline
@@ -205,22 +241,23 @@
         <ImageButton
             android:id="@+id/imgbtnTimeStart"
             style="@style/InputImageButtonTime"
-            android:layout_marginStart="252dp"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="115dp"
             android:contentDescription="@string/tv_starttime_label"
             android:src="@drawable/ic_access_time_black_24dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+            app:layout_constraintEnd_toStartOf="@+id/btnInputSave"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTo" />
 
         <ImageButton
             android:id="@+id/imgbtnTimeEnd"
             style="@style/InputImageButtonTime"
-            android:layout_marginStart="252dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="115dp"
             android:layout_marginBottom="@dimen/margin_8"
             android:contentDescription="@string/tv_endtime_label"
             android:src="@drawable/ic_access_time_black_24dp"
             app:layout_constraintBottom_toTopOf="@+id/edPhone"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/btnInputSave"
             app:layout_constraintTop_toBottomOf="@+id/imgbtnTimeStart"
             app:layout_constraintVertical_bias="1.0" />
     </android.support.constraint.ConstraintLayout>

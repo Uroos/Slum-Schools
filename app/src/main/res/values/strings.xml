@@ -29,6 +29,8 @@
     <string name="tv_email_label">Email</string>
     <string name="tv_starttime_label">Start time</string>
     <string name="tv_endtime_label">End time</string>
+    <string name="tv_dayopen_label">Days open</string>
+    <string name="tv_to_label">To</string>
     <string name="tv_phone_label">Phone</string>
 
     <string name="btn_save">Save</string>
@@ -55,5 +57,15 @@
     <string name="groupTickCross">groupTickCross</string>
     <integer name="duration">450</integer>
 
+    <!--Spinner resource-->
+    <string-array name="days_array">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>
 

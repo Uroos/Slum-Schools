@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.model.School;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +30,7 @@ public class DetailActivity extends AppCompatActivity {
     private String startTime;
     private String endTime;
     private String phone;
+    private AdView mAdView;
 
     @BindView(R.id.tvDetailName)
     TextView tvName;
@@ -46,6 +50,13 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+
+        // Use this for testing purpose "ca-app-pub-3940256099942544/6300978111"
+        // My personal id "ca-app-pub-7680180921711744~8820543312"
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         // The toolbar appears in the layout but it's not functioning as the app bar.
         // To apply the toolbar as the app bar, call setSupportActionBar() and pass the Toolbar object from the layout.
@@ -119,7 +130,8 @@ public class DetailActivity extends AppCompatActivity {
     public void like() {
         // Service is started to update the widget.
         Toast.makeText(this, "Liked!", Toast.LENGTH_SHORT).show();
-        School school = new School(name, address, email, startTime, endTime, phone, 0, 0);
+        School school = new School(name, address, email, startTime, endTime, phone, 0, 0,"","");
+        //School school = new School(name, address, email, startTime, endTime, phone, 0, 0);
         SchoolUpdateService.startSchoolUpdate(this, school);
        // backToMenu.start();
 

@@ -21,6 +21,8 @@ public class School implements Parcelable{
     private String phone_no;
     private double latitude;
     private double longitude;
+    private String dayFrom;
+    private String dayTo;
 
     public School (){}
 
@@ -31,7 +33,9 @@ public class School implements Parcelable{
                   String end_time,
                   String phone_no,
                   double latitude,
-                  double longitude) {
+                  double longitude,
+                  String dayFrom,
+                  String dayTo) {
         this.name = name;
         this.address = address;
         this.email = email;
@@ -40,6 +44,8 @@ public class School implements Parcelable{
         this.phone_no = phone_no;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.dayFrom=dayFrom;
+        this.dayTo=dayTo;
     }
 
     public String getName() {
@@ -71,6 +77,10 @@ public class School implements Parcelable{
     public double getLongitude() {
         return longitude;
     }
+
+    public String getDayFrom() { return dayFrom; }
+
+    public String getDayTo() { return dayTo; }
 
     @Override
     public String toString() {
@@ -109,6 +119,10 @@ public class School implements Parcelable{
         this.longitude = longitude;
     }
 
+    public void setDayFrom(String dayFrom) { this.dayFrom = dayFrom; }
+
+    public void setDayTo(String dayTo) { this.dayTo = dayTo; }
+
     // Parcelling part
     public School(Parcel in){
         this.name = in.readString();
@@ -119,6 +133,8 @@ public class School implements Parcelable{
         this.phone_no = in.readString();
         this.latitude = in.readDouble();
         this.longitude = in.readDouble();
+        this.dayFrom = in.readString();
+        this.dayTo = in.readString();
     }
     @Override
     public int describeContents() {
@@ -135,5 +151,7 @@ public class School implements Parcelable{
         dest.writeString(this.phone_no);
         dest.writeDouble(this.latitude);
         dest.writeDouble(this.longitude);
+        dest.writeString(this.dayFrom);
+        dest.writeString(this.dayTo);
     }
 }
