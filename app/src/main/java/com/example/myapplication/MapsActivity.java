@@ -141,11 +141,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         headerView = navigationView.getHeaderView(0);
         menuNav=navigationView.getMenu();
         itemLogout = menuNav.findItem(R.id.log_out);
-        if(user==null){
-            itemLogout.setEnabled(false);
-        }else{
-            itemLogout.setEnabled(true);
-        }
         navUsername = headerView.findViewById(R.id.nav_header_text);
         navUsername.setText(emailOrAppName);
 
@@ -170,6 +165,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         firebaseAuth = FirebaseAuth.getInstance();
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser();
+            Log.v(TAG, "user is " + user.getEmail());
+            itemLogout.setEnabled(true);
+        }else{
+            itemLogout.setEnabled(false);
         }
 
         // Run this part only when activity starts for the first time. This sets the camera on user
@@ -488,6 +487,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return super.onOptionsItemSelected(item);
     }
 
+//    @Override
+//    public void finishAndRemoveTask() {
+//        user=null;
+//        super.finishAndRemoveTask();
+//    }
+
     // Implements the behavior of navigation drawer.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -528,6 +533,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                     Toast.makeText(MapsActivity.this, "You are now logged out", Toast.LENGTH_SHORT).show();
                                     emailOrAppName = "";
                                     navUsername.setText(emailOrAppName);
+                                    user=null;
                                     MapsActivity.this.loadUserMarkers();
                                     // Start current activity again after logging out, because pressing
                                     // the back button just exits the activity and shows the login screen again.
