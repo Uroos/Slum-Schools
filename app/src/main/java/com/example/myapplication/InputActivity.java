@@ -142,6 +142,8 @@ public class InputActivity extends AppCompatActivity {
             editTextStartTime.setText(school.getStart_time());
             editTextEndTime.setText(school.getEnd_time());
             editTextPhone.setText(school.getPhone_no());
+            spinnerFrom.setSelection(adapter.getPosition(school.getDayFrom()));
+            spinnerTo.setSelection(adapter.getPosition(school.getDayTo()));
 
         } else if (getIntent() != null) {
             userId = getIntent().getStringExtra(getString(R.string.key_uid));

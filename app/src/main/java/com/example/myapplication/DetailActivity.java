@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimatedVectorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -27,6 +26,8 @@ public class DetailActivity extends AppCompatActivity {
     private String name;
     private String address;
     private String email;
+    private String dayFrom;
+    private String dayTo;
     private String startTime;
     private String endTime;
     private String phone;
@@ -38,13 +39,17 @@ public class DetailActivity extends AppCompatActivity {
     TextView tvAddress;
     @BindView(R.id.tvDetailEmail)
     TextView tvEmail;
+    @BindView(R.id.tvDetailDayFrom)
+    TextView tvDayFrom;
+    @BindView(R.id.tvDetailDayTo)
+    TextView tvDayTo;
     @BindView(R.id.tvDetailStartTime)
     TextView tvStartTime;
     @BindView(R.id.tvDetailEndTime)
     TextView tvEndTime;
     @BindView(R.id.tvDetailPhone)
     TextView tvPhone;
-    AnimatedVectorDrawable backToMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
         // Enable the app bar's "home" button by calling setDisplayHomeAsUpEnabled(true)
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-       actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
         //actionbar.setHomeAsUpIndicator(backToMenu);
         //backToMenu.start();
 
@@ -78,10 +83,12 @@ public class DetailActivity extends AppCompatActivity {
                 name = school.getName();
                 address = school.getAddress();
                 email = school.getEmail();
+                dayFrom = school.getDayFrom();
+                dayTo = school.getDayTo();
                 startTime = school.getStart_time();
                 endTime = school.getEnd_time();
                 phone = school.getPhone_no();
-                populateUI(name, address, email, startTime, endTime, phone);
+                populateUI(name, address, email, dayFrom, dayTo, startTime, endTime, phone);
             } else {
                 finish();
             }
@@ -89,16 +96,20 @@ public class DetailActivity extends AppCompatActivity {
             populateUI(savedInstanceState.getString(getString(R.string.key_name)),
                     savedInstanceState.getString(getString(R.string.key_address)),
                     savedInstanceState.getString(getString(R.string.key_email)),
+                    savedInstanceState.getString(getString(R.string.key_dayfrom)),
+                    savedInstanceState.getString(getString(R.string.key_dayto)),
                     savedInstanceState.getString(getString(R.string.key_starttime)),
                     savedInstanceState.getString(getString(R.string.key_endtime)),
                     savedInstanceState.getString(getString(R.string.key_phone)));
         }
     }
 
-    private void populateUI(String name, String address, String email, String startTime, String endTime, String phone) {
+    private void populateUI(String name, String address, String email, String dayFrom, String dayTo, String startTime, String endTime, String phone) {
         tvName.setText(name);
         tvAddress.setText(address);
         tvEmail.setText(email);
+        tvDayFrom.setText(dayFrom);
+        tvDayTo.setText(dayTo);
         tvStartTime.setText(startTime);
         tvEndTime.setText(endTime);
         tvPhone.setText(phone);
@@ -130,11 +141,8 @@ public class DetailActivity extends AppCompatActivity {
     public void like() {
         // Service is started to update the widget.
         Toast.makeText(this, "Liked!", Toast.LENGTH_SHORT).show();
-        School school = new School(name, address, email, startTime, endTime, phone, 0, 0,"","");
-        //School school = new School(name, address, email, startTime, endTime, phone, 0, 0);
+        School school = new School(name, address, email, startTime, endTime, phone, 0, 0, "", "");
         SchoolUpdateService.startSchoolUpdate(this, school);
-       // backToMenu.start();
-
     }
 
     @Override
@@ -143,6 +151,8 @@ public class DetailActivity extends AppCompatActivity {
         String name = tvName.getText().toString();
         String address = tvAddress.getText().toString();
         String email = tvEmail.getText().toString();
+        String dayFrom = tvDayFrom.getText().toString();
+        String dayTo = tvDayTo.getText().toString();
         String startTime = tvStartTime.getText().toString();
         String endTime = tvEndTime.getText().toString();
         String phone = tvPhone.getText().toString();
@@ -150,6 +160,8 @@ public class DetailActivity extends AppCompatActivity {
         outState.putString(getString(R.string.key_name), name);
         outState.putString(getString(R.string.key_address), address);
         outState.putString(getString(R.string.key_email), email);
+        outState.putString(getString(R.string.key_dayfrom), dayFrom);
+        outState.putString(getString(R.string.key_dayto), dayTo);
         outState.putString(getString(R.string.key_starttime), startTime);
         outState.putString(getString(R.string.key_endtime), endTime);
         outState.putString(getString(R.string.key_phone), phone);

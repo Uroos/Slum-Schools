@@ -55,6 +55,10 @@
     <string name="tick">tick</string>
     <string name="cross">cross</string>
     <string name="groupTickCross">groupTickCross</string>
+    <string name="tv_dayfrom_label">Days open</string>
+    <string name="tv_dayto_label">To</string>
+    <string name="key_dayfrom">dayfrom</string>
+    <string name="key_dayto">dayto</string>
     <integer name="duration">450</integer>
 
     <!--Spinner resource-->

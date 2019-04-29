@@ -89,15 +89,33 @@
             app:layout_constraintTop_toBottomOf="@+id/tvDetailAddress" />
 
         <TextView
+            android:id="@+id/tvDetailDayFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvDetailDayToLabel"
+            app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+        <TextView
+            android:id="@+id/tvDetailDayTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="176dp"
+            android:text="Tuesday"
+            app:layout_constraintEnd_toStartOf="@+id/btnDetailEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailEmail" />
+
+        <TextView
             android:id="@+id/tvDetailStartTime"
             style="@style/Base.TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginTop="24dp"
             android:gravity="center_vertical"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toBottomOf="@+id/tvDetailEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailDayTo" />
 
 
         <TextView
@@ -159,6 +177,27 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             tools:text="Email" />
+
+        <TextView
+            android:id="@+id/tvDetailDayFromLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_dayopen_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvDetailDayFrom"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            tools:text="@string/tv_dayopen_label" />
+
+        <TextView
+            android:id="@+id/tvDetailDayToLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_to_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvDetailDayTo"
+            app:layout_constraintEnd_toStartOf="@+id/tvDetailDayTo"
+            app:layout_constraintStart_toEndOf="@+id/tvDetailDayFrom"
+            tools:text="@string/tv_to_label" />
 
         <TextView
             android:id="@+id/tvDetailStartTimeLabel"

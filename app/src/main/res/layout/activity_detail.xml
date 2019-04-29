@@ -74,13 +74,33 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDetailAddress" />
 
     <TextView
+        android:id="@+id/tvDetailDayFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wednesday"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvDetailDayToLabel"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/tvDetailDayFromLabel"
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/tvDetailDayTo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="72dp"
+        android:text="Wednesday"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailEmail" />
+
+    <TextView
         android:id="@+id/tvDetailStartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_24"
+        android:layout_marginTop="24dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailDayTo" />
 
     <TextView
         android:id="@+id/tvDetailPhone"
@@ -137,6 +157,27 @@
         tools:text="Email" />
 
     <TextView
+        android:id="@+id/tvDetailDayFromLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_dayopen_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvDetailDayFrom"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        tools:text="@string/tv_dayopen_label" />
+
+    <TextView
+        android:id="@+id/tvDetailDayToLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_to_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvDetailDayTo"
+        app:layout_constraintEnd_toStartOf="@+id/tvDetailDayTo"
+        app:layout_constraintStart_toEndOf="@+id/tvDetailDayFrom"
+        tools:text="@string/tv_to_label" />
+
+    <TextView
         android:id="@+id/tvDetailStartTimeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -182,6 +223,7 @@
     <ImageButton
         android:id="@+id/btnDetailCall"
         style="@style/DetailImageButtonThemeLandscape.Portrait"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/content_description_call"
         android:src="@drawable/ic_call_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -193,6 +235,7 @@
     <ImageButton
         android:id="@+id/btnDetailLike"
         style="@style/DetailImageButtonThemeLandscape.Portrait"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/content_description_like"
         android:src="@drawable/ic_mood_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -204,6 +247,7 @@
     <ImageButton
         android:id="@+id/btnDetailEmail"
         style="@style/DetailImageButtonThemeLandscape.Portrait"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/content_description_email"
         android:src="@drawable/ic_mail_outline_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"

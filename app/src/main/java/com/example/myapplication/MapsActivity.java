@@ -3,24 +3,29 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -57,6 +63,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.myapplication.utils.Utils.isOnline;
+import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,
@@ -88,6 +95,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private View headerView;
+    private Menu menuNav;
+    private MenuItem itemLogout;
+    private TextView navUsername;
+    private String emailOrAppName = "";
 
     @BindView(R.id.tv_error_message)
     TextView tvErrorMessage;
@@ -101,14 +113,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
         ButterKnife.bind(this);
 
-       // AnimatedVectorDrawable menuToBack = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_menu_to_back);
-
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+            emailOrAppName = savedInstanceState.getString("key_navheader_text");
         }
         // This arraylist will contain all the markers downloaded from the database.
         schools = new ArrayList<>();
@@ -122,12 +132,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Enable the app bar's "home" button by calling setDisplayHomeAsUpEnabled(true)
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-       actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         //actionbar.setHomeAsUpIndicator(menuToBack);
         //menuToBack.start();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        headerView = navigationView.getHeaderView(0);
+        menuNav=navigationView.getMenu();
+        itemLogout = menuNav.findItem(R.id.log_out);
+        if(user==null){
+            itemLogout.setEnabled(false);
+        }else{
+            itemLogout.setEnabled(true);
+        }
+        navUsername = headerView.findViewById(R.id.nav_header_text);
+        navUsername.setText(emailOrAppName);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -227,7 +248,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                  */
                 if (user != null) {
                     // When marker is added then input screen is launched to save additional details.
-                    mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                    mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.defaultMarker(HUE_AZURE)));
                     MapsActivity.this.launchInputScreen(latLng);
                 }
             }
@@ -391,13 +412,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if (nameofnode.equals(user.getUid())) {
 
                             // Only add the marker that is in the logged in user's database record
-                            mMap.addMarker(new MarkerOptions().position(currentLatLng)
-                                    .title(school.getName()));
+                            Marker pinnedMarker = mMap.addMarker(new MarkerOptions().position(currentLatLng).title(school.getName())
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker64)));
+                            startDropMarkerAnimation(pinnedMarker);
                             schools.add(school);
                         }
                     } else {
                         //If user is not logged in then show all the markers stored in database
-                        mMap.addMarker(new MarkerOptions().position(currentLatLng).title(school.getName()));
+                        Marker pinnedMarker = mMap.addMarker(new MarkerOptions().position(currentLatLng).title(school.getName())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker64)));
+                        startDropMarkerAnimation(pinnedMarker);
                     }
                 }
             }
@@ -418,6 +442,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             outState.putBundle(MAPVIEW_BUNDLE_KEY, bundle);
         }
         mapFragment.onSaveInstanceState(bundle);
+        outState.putString("key_navheader_text", emailOrAppName);
     }
 
     @Override
@@ -501,11 +526,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(MapsActivity.this, "You are now logged out", Toast.LENGTH_SHORT).show();
+                                    emailOrAppName = "";
+                                    navUsername.setText(emailOrAppName);
                                     MapsActivity.this.loadUserMarkers();
                                     // Start current activity again after logging out, because pressing
                                     // the back button just exits the activity and shows the login screen again.
                                     Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
                                     MapsActivity.this.startActivity(intent);
+                                    itemLogout.setEnabled(false);
                                 }
                             });
                 } else {
@@ -526,7 +554,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 // Choose authentication providers
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.EmailBuilder().build(),
                         new AuthUI.IdpConfig.GoogleBuilder().build());
 
                 if (user != null) {
@@ -562,6 +589,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 user = FirebaseAuth.getInstance().getCurrentUser();
+                emailOrAppName = user.getEmail();
+                navUsername.setText(emailOrAppName);
+                itemLogout.setEnabled(true);
                 loadUserMarkers();
                 //Toast.makeText(this, "You are now logged in with email: " + user.getEmail(), Toast.LENGTH_SHORT).show();
 
@@ -579,5 +609,33 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         }
+    }
+
+    // Added from "https://gist.github.com/piruin/94dc141e7736851b002c"
+    private void startDropMarkerAnimation(final Marker marker) {
+        final LatLng target = marker.getPosition();
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        Projection proj = mMap.getProjection();
+        Point targetPoint = proj.toScreenLocation(target);
+        final long duration = (long) (200 + (targetPoint.y * 0.6));
+        Point startPoint = proj.toScreenLocation(marker.getPosition());
+        startPoint.y = 0;
+        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
+        final Interpolator interpolator = new LinearOutSlowInInterpolator();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed / duration);
+                double lng = t * target.longitude + (1 - t) * startLatLng.longitude;
+                double lat = t * target.latitude + (1 - t) * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+                if (t < 1.0) {
+                    // Post again 16ms later == 60 frames per second
+                    handler.postDelayed(this, 16);
+                }
+            }
+        });
     }
 }

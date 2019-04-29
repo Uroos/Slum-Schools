@@ -103,7 +103,7 @@
 
         <Spinner
             android:id="@+id/spinnerFrom"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -122,10 +122,10 @@
 
         <Spinner
             android:id="@+id/spinnerTo"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="232dp"
+            android:layout_marginEnd="124dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
         <TextView
@@ -143,13 +143,11 @@
 
         <EditText
             android:id="@+id/edStartTime"
-            android:layout_width="@dimen/ed_time_width"
+            android:layout_width="180dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
             android:layout_marginTop="8dp"
             android:focusable="false"
             android:inputType="time"
-            app:layout_constraintEnd_toStartOf="@+id/imgbtnTimeStart"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/spinnerFrom" />
 
@@ -168,16 +166,12 @@
 
         <EditText
             android:id="@+id/edEndTime"
-            android:layout_width="@dimen/ed_time_width"
+            android:layout_width="180dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
             android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_8"
-            android:layout_marginRight="@dimen/margin_8"
             android:ems="10"
             android:focusable="false"
             android:inputType="time"
-            app:layout_constraintEnd_toStartOf="@+id/imgbtnTimeEnd"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/edStartTime" />
 
@@ -241,23 +235,27 @@
         <ImageButton
             android:id="@+id/imgbtnTimeStart"
             style="@style/InputImageButtonTime"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="115dp"
+            android:layout_marginEnd="60dp"
             android:contentDescription="@string/tv_starttime_label"
             android:src="@drawable/ic_access_time_black_24dp"
             app:layout_constraintEnd_toStartOf="@+id/btnInputSave"
+            app:layout_constraintStart_toEndOf="@+id/edStartTime"
             app:layout_constraintTop_toBottomOf="@+id/spinnerTo" />
 
         <ImageButton
             android:id="@+id/imgbtnTimeEnd"
             style="@style/InputImageButtonTime"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="115dp"
+            android:layout_marginEnd="60dp"
             android:layout_marginBottom="@dimen/margin_8"
             android:contentDescription="@string/tv_endtime_label"
             android:src="@drawable/ic_access_time_black_24dp"
             app:layout_constraintBottom_toTopOf="@+id/edPhone"
             app:layout_constraintEnd_toStartOf="@+id/btnInputSave"
+            app:layout_constraintStart_toEndOf="@+id/edEndTime"
             app:layout_constraintTop_toBottomOf="@+id/imgbtnTimeStart"
             app:layout_constraintVertical_bias="1.0" />
     </android.support.constraint.ConstraintLayout>
