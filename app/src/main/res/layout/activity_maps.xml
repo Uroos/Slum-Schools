@@ -48,7 +48,8 @@
     </FrameLayout>
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
-    <android.support.design.widget.NavigationView
+
+    <com.rom4ek.arcnavigationview.ArcNavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -56,6 +57,8 @@
         android:background="@color/colorText"
         android:elevation="@dimen/nav_drawer_elevation"
         android:fitsSystemWindows="true"
+        app:arc_cropDirection="cropInside"
+        app:arc_width="80dp"
         app:headerLayout="@layout/nav_header"
         app:itemBackground="@drawable/nav_background"
         app:itemTextColor="@color/colorPrimaryDark"

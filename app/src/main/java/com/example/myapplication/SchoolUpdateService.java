@@ -25,17 +25,18 @@ public class SchoolUpdateService extends IntentService {
         intent.putExtras(bundle);
         context.startService(intent);
     }
+
     @Override
-    protected void onHandleIntent( Intent intent) {
+    protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             String action = intent.getAction();
             if (ACTION_SCHOOL_UPDATE.equals(action)) {
                 School school = intent.getParcelableExtra("school");
-                //Timber.v("ingredients sent to service are: " + ingredients);
                 handleActionSchoolUpdate(school);
             }
         }
     }
+
     private void handleActionSchoolUpdate(School school) {
         // here we will run data base query to get the favorite recipe and display in widget
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);

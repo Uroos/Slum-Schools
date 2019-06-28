@@ -1,12 +1,16 @@
 package com.example.myapplication;
 
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,9 +27,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +42,9 @@ public class InputActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+
+    SharedPreferences sharedPref;
+    String chosenCountry = "Pakistan";
 
     @BindView(R.id.btnInputSave)
     Button btnSave;
@@ -59,9 +64,7 @@ public class InputActivity extends AppCompatActivity {
     EditText editTextEndTime;
     @BindView(R.id.edPhone)
     EditText editTextPhone;
-    //    @BindView(R.id.spinnerFrom)
     Spinner spinnerFrom;
-    //    @BindView(R.id.spinnerTo)
     Spinner spinnerTo;
 
     private String name;
@@ -72,33 +75,26 @@ public class InputActivity extends AppCompatActivity {
     private String phone;
     private int hour, minute;
     private String strHrsToShow = "";
-    String dayFrom;
-    String dayTo;
+    private String dayFrom;
+    private String dayTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
         ButterKnife.bind(InputActivity.this);
-//        List<String> categories = new ArrayList<String>();
-//        categories.add("Automobile");
-//        categories.add("Business Services");
-//        categories.add("Computers");
-//        categories.add("Education");
-//        categories.add("Personal");
-//        categories.add("Travel");
+
+        //sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        //chosenCountry = sharedPref.getString("key_country", null);
+        //Toast.makeText(this, "saved country input activity is: " + chosenCountry, Toast.LENGTH_SHORT).show();
+
         spinnerFrom = findViewById(R.id.spinnerFrom);
         spinnerTo = findViewById(R.id.spinnerTo);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.days_array, android.R.layout.simple_spinner_dropdown_item);
-        // Specify the layout to use when the list of choices appears
-        // Creating adapter for spinner
-       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
         // Drop down layout style - list view with radio button
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         // Apply the adapter to the spinner
         spinnerFrom.setAdapter(adapter);
         spinnerTo.setAdapter(adapter);
@@ -109,7 +105,6 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dayFrom = parent.getItemAtPosition(position).toString();
-
             }
 
             @Override
@@ -125,7 +120,6 @@ public class InputActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         // if(savedInstanceState==null) {
@@ -133,9 +127,9 @@ public class InputActivity extends AppCompatActivity {
             userId = getIntent().getStringExtra(getString(R.string.key_uid));
             latitude = getIntent().getDoubleExtra(getString(R.string.key_latitude), 0);
             longitude = getIntent().getDoubleExtra(getString(R.string.key_longitude), 0);
-            Log.v(InputActivity.class.getName(), "School object is passed");
             Bundle data = getIntent().getExtras();
             School school = data.getParcelable(getString(R.string.key_bundle_school));
+
             editTextName.setText(school.getName());
             editTextAddress.setText(school.getAddress());
             editTextEmail.setText(school.getEmail());
@@ -149,8 +143,6 @@ public class InputActivity extends AppCompatActivity {
             userId = getIntent().getStringExtra(getString(R.string.key_uid));
             latitude = getIntent().getDoubleExtra(getString(R.string.key_latitude), 0);
             longitude = getIntent().getDoubleExtra(getString(R.string.key_longitude), 0);
-            Log.v(InputActivity.class.getName(), "School object is not passed");
-            // Toast.makeText(this, " school object is passed", Toast.LENGTH_SHORT).show();
         }
 
         // The toolbar appears in the layout but it's not functioning as the app bar.
@@ -172,7 +164,26 @@ public class InputActivity extends AppCompatActivity {
         // Main access point for the database
         firebaseDatabase = FirebaseDatabase.getInstance();
         // Using the access point, get access to a specific place in database
-        databaseReference = firebaseDatabase.getReference().child("location").child(userId);
+        //databaseReference = firebaseDatabase.getReference().child(chosenCountry).child(userId);
+        databaseReference = firebaseDatabase.getReference().child(chosenCountry).child(userId);
+
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (getIntent() != null && getIntent().hasExtra("school")) {
+            menu.findItem(R.id.delete).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.delete_menu, menu);
+        // show the button when some condition is true
+        return true;
     }
 
     @Override
@@ -181,12 +192,36 @@ public class InputActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.delete:
+                createDialog();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void createDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Delete the school data?")
+                .setMessage("Going ahead will delete all the saved data about your school.")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        databaseReference.removeValue();
+                        Toast.makeText(InputActivity.this, "Item deleted.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+    }
+
     /**
      * This mathod saves to cloud only if user is online.
+     *
      * @param view
      */
     @OnClick(R.id.btnInputSave)
@@ -197,8 +232,6 @@ public class InputActivity extends AppCompatActivity {
         startTime = editTextStartTime.getText().toString();
         endTime = editTextEndTime.getText().toString();
         phone = editTextPhone.getText().toString();
-
-        Log.v(InputActivity.class.getName(), "user id latitude is: " + latitude);
 
         if (isOnline(this)) {
             if (!(TextUtils.isEmpty(name))
@@ -211,8 +244,8 @@ public class InputActivity extends AppCompatActivity {
                     && !TextUtils.isEmpty(dayTo)
             ) {
                 School school = new School(name, address, email, startTime, endTime, phone, latitude, longitude, dayFrom, dayTo);
-                //School school = new School(name, address, email, startTime, endTime, phone, latitude, longitude);
                 databaseReference.setValue(school);
+                Toast.makeText(InputActivity.this, "School location is saved!", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 Toast.makeText(this, "All fields must be filled.", Toast.LENGTH_SHORT).show();

@@ -58,7 +58,8 @@ public class DetailActivity extends AppCompatActivity {
 
         // Use this for testing purpose "ca-app-pub-3940256099942544/6300978111"
         // My personal id "ca-app-pub-7680180921711744~8820543312"
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+        // Change here and in xml and in manifest
+        MobileAds.initialize(this, "ca-app-pub-7680180921711744~8820543312");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -73,8 +74,7 @@ public class DetailActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
-        //actionbar.setHomeAsUpIndicator(backToMenu);
-        //backToMenu.start();
+
 
         if (savedInstanceState == null) {
             if (getIntent() != null) {
@@ -140,7 +140,7 @@ public class DetailActivity extends AppCompatActivity {
     @OnClick(R.id.btnDetailLike)
     public void like() {
         // Service is started to update the widget.
-        Toast.makeText(this, "Liked!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Added to the Widget!", Toast.LENGTH_SHORT).show();
         School school = new School(name, address, email, startTime, endTime, phone, 0, 0, "", "");
         SchoolUpdateService.startSchoolUpdate(this, school);
     }
@@ -171,6 +171,7 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                //This call requires minSDK of 21
                 finishAndRemoveTask();
                 return true;
         }

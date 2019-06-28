@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:orientation="vertical"
+    tools:context=".EnterActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/poor_school"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingTop="200dp"
+        android:paddingBottom="20dp"
+        android:text="Select your country"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryText" />
+    
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorText"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_showFullName="true"
+        app:ccpDialog_textColor="@color/colorAccent"
+        app:ccp_showPhoneCode="false"/>
+    <Button
+        android:layout_width="240dp"
+        android:id="@+id/btn_enter"
+        android:onClick="enter"
+        android:layout_height="wrap_content"
+        android:text="Enter"
+        android:backgroundTint="@color/colorText"
+        android:layout_gravity="center"/>
+    </LinearLayout>
+</FrameLayout>

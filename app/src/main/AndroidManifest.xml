@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -32,7 +31,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/school_app_widget_info" />
         </receiver>
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,10 +42,14 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="[a-app-pub-3940256099942544/6300978111]"/>
+            android:value="[ca-app-pub-7680180921711744~8820543312]" />
+
+        <activity
+            android:name=".EnterActivity"
+            android:screenOrientation="portrait"></activity>
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/app_name"
@@ -58,6 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".DetailActivity"
             android:label="Detail Screen"

@@ -2,20 +2,17 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,7 +22,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Interpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +33,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -63,7 +58,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.myapplication.utils.Utils.isOnline;
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE;
+import static com.example.myapplication.utils.Utils.startDropMarkerAnimation;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,
@@ -106,22 +101,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     SupportMapFragment mapFragment;
 
+    SharedPreferences sharedPref;
+    String chosenCountry = "Pakistan";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         ButterKnife.bind(this);
-
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
-            emailOrAppName = savedInstanceState.getString("key_navheader_text");
-        }
-        // This arraylist will contain all the markers downloaded from the database.
-        schools = new ArrayList<>();
 
         // The toolbar appears in the layout but it's not functioning as the app bar.
         // To apply the toolbar as the app bar, call setSupportActionBar() and pass the Toolbar object from your layout.
@@ -133,13 +121,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        //actionbar.setHomeAsUpIndicator(menuToBack);
-        //menuToBack.start();
+
+        // Use getDefaultSharedPreferences() to get the default shared preference file for the entire app.
+//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+//        chosenCountry = sharedPref.getString("key_country", null);
+        //Toast.makeText(this, "saved country is: " + chosenCountry, Toast.LENGTH_SHORT).show();
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+
+        // This is used for retrieving map state.
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+            emailOrAppName = savedInstanceState.getString("key_navheader_text");
+        }
+        // This arraylist will contain all the markers downloaded from the database.
+        schools = new ArrayList<>();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         headerView = navigationView.getHeaderView(0);
-        menuNav=navigationView.getMenu();
+        menuNav = navigationView.getMenu();
         itemLogout = menuNav.findItem(R.id.log_out);
         navUsername = headerView.findViewById(R.id.nav_header_text);
         navUsername.setText(emailOrAppName);
@@ -160,15 +163,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Main access point for the database
         firebaseDatabase = FirebaseDatabase.getInstance();
         // Using the access point, get access to a specific place in database
-        databaseReference = firebaseDatabase.getReference().child("location");
+        //databaseReference = firebaseDatabase.getReference().child(chosenCountry);
+        databaseReference = firebaseDatabase.getReference().child(chosenCountry);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser();
-            Log.v(TAG, "user is " + user.getEmail());
+            navUsername.setText(user.getEmail());
             itemLogout.setEnabled(true);
-        }else{
+            itemLogout.setVisible(true);
+        } else {
             itemLogout.setEnabled(false);
+            itemLogout.setVisible(false);
         }
 
         // Run this part only when activity starts for the first time. This sets the camera on user
@@ -186,14 +193,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 currentLongitude = location.getLongitude();
                                 currentLatLng = new LatLng(currentLatitude, currentLongitude);
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 10));
-                                //Log.v(TAG, "On current latitude is: " + location.getLatitude());
                             }
                         }
                     });
                 } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATION);
                 } else {
-                    Log.v(TAG, "On permission not granted");
                     currentLatitude = 0;
                     currentLongitude = 0;
                     currentLatLng = new LatLng(currentLatitude, currentLongitude);
@@ -211,7 +216,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             tvErrorMessage.setVisibility(View.VISIBLE);
             mapFragment.getView().setVisibility(View.GONE);
         }
-        Log.v(TAG, "On create called");
     }
 
 
@@ -226,8 +230,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.v(MapsActivity.this.getClass().getName(), "On MapReady is called");
-
         mMap = googleMap;
         // Clear the map of any markers already present and only show logged in user's marker
         mMap.clear();
@@ -247,7 +249,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                  */
                 if (user != null) {
                     // When marker is added then input screen is launched to save additional details.
-                    mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.defaultMarker(HUE_AZURE)));
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker64)));
+                    startDropMarkerAnimation(marker, mMap);
                     MapsActivity.this.launchInputScreen(latLng);
                 }
             }
@@ -288,13 +291,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             // once ensures that only the first time camera zooms in to the current location
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 10));
                             mMap.setMyLocationEnabled(true);
-                            //Log.v(TAG, "On current latitude is: " + location.getLatitude());
                         }
                     }
                 });
             }
-            Log.v(MapsActivity.this.getClass().getName(), "On Location is allowed");
-
         } else {
             mMap.setMyLocationEnabled(false);
         }
@@ -304,7 +304,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        Log.v(this.getClass().getName(), "On resume called");
         if (mMap != null) {
             enableMyLocation();
             loadUserMarkers();
@@ -350,7 +349,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             School school = dataSnapshot.getValue(School.class);
-                            Log.v(TAG, "Getting value from database. School name: " + school.getName());
                             Intent intent = new Intent(MapsActivity.this, InputActivity.class);
                             String id = user.getUid();
                             intent.putExtra(getString(R.string.key_uid), id);
@@ -384,7 +382,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (user != null) {
             userId = user.getUid();
-            Log.v(MapsActivity.this.getClass().getName(), "user id is: " + userId);
         }
         databaseReference.addValueEventListener(new ValueEventListener() {
             /**
@@ -407,20 +404,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     LatLng currentLatLng = new LatLng(school.getLatitude(), school.getLongitude());
                     if (user != null) {
-                        //Log.v(MapsActivity.this.getClass().getName(), "user is not null");
                         if (nameofnode.equals(user.getUid())) {
-
                             // Only add the marker that is in the logged in user's database record
                             Marker pinnedMarker = mMap.addMarker(new MarkerOptions().position(currentLatLng).title(school.getName())
                                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker64)));
-                            startDropMarkerAnimation(pinnedMarker);
+                            startDropMarkerAnimation(pinnedMarker, mMap);
                             schools.add(school);
                         }
                     } else {
                         //If user is not logged in then show all the markers stored in database
                         Marker pinnedMarker = mMap.addMarker(new MarkerOptions().position(currentLatLng).title(school.getName())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker64)));
-                        startDropMarkerAnimation(pinnedMarker);
+                        startDropMarkerAnimation(pinnedMarker, mMap);
                     }
                 }
             }
@@ -447,7 +442,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onStart() {
         super.onStart();
-        Log.v(TAG, "On Start called");
         mapFragment.onStart();
     }
 
@@ -456,7 +450,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onPause() {
         super.onPause();
         mapFragment.onPause();
-        Log.v(this.getClass().getName(), "On pause called");
         if (authStateListener != null) {
             firebaseAuth.removeAuthStateListener(authStateListener);
         }
@@ -466,14 +459,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onStop() {
         super.onStop();
         mapFragment.onStop();
-        Log.v(this.getClass().getName(), "On stop called");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mapFragment.onDestroy();
-        Log.v(this.getClass().getName(), "On destroy called");
     }
 
     // When hamburger icon is pressed it opens the navigation drawer.
@@ -487,11 +478,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    public void finishAndRemoveTask() {
-//        user=null;
-//        super.finishAndRemoveTask();
-//    }
 
     // Implements the behavior of navigation drawer.
     @Override
@@ -503,8 +489,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (id) {
             case R.id.nav_add_marker:
                 //start login screen if user is not logged in else dismiss to go back to maps
-                //Toast.makeText(this, "add marker is pressed", Toast.LENGTH_SHORT).show();
-                //Timber.v("add marker is pressed");
                 once = 0;
                 if (isOnline(this)) {
                     if (user == null) {
@@ -533,13 +517,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                     Toast.makeText(MapsActivity.this, "You are now logged out", Toast.LENGTH_SHORT).show();
                                     emailOrAppName = "";
                                     navUsername.setText(emailOrAppName);
-                                    user=null;
+                                    user = null;
                                     MapsActivity.this.loadUserMarkers();
                                     // Start current activity again after logging out, because pressing
                                     // the back button just exits the activity and shows the login screen again.
                                     Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
                                     MapsActivity.this.startActivity(intent);
                                     itemLogout.setEnabled(false);
+                                    itemLogout.setVisible(false);
                                 }
                             });
                 } else {
@@ -591,17 +576,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            //IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 emailOrAppName = user.getEmail();
                 navUsername.setText(emailOrAppName);
                 itemLogout.setEnabled(true);
+                itemLogout.setVisible(true);
                 loadUserMarkers();
-                //Toast.makeText(this, "You are now logged in with email: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-
-                // ...
             } else if (resultCode == RESULT_CANCELED) {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
@@ -615,33 +597,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         }
-    }
-
-    // Added from "https://gist.github.com/piruin/94dc141e7736851b002c"
-    private void startDropMarkerAnimation(final Marker marker) {
-        final LatLng target = marker.getPosition();
-        final Handler handler = new Handler();
-        final long start = SystemClock.uptimeMillis();
-        Projection proj = mMap.getProjection();
-        Point targetPoint = proj.toScreenLocation(target);
-        final long duration = (long) (200 + (targetPoint.y * 0.6));
-        Point startPoint = proj.toScreenLocation(marker.getPosition());
-        startPoint.y = 0;
-        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
-        final Interpolator interpolator = new LinearOutSlowInInterpolator();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                long elapsed = SystemClock.uptimeMillis() - start;
-                float t = interpolator.getInterpolation((float) elapsed / duration);
-                double lng = t * target.longitude + (1 - t) * startLatLng.longitude;
-                double lat = t * target.latitude + (1 - t) * startLatLng.latitude;
-                marker.setPosition(new LatLng(lat, lng));
-                if (t < 1.0) {
-                    // Post again 16ms later == 60 frames per second
-                    handler.postDelayed(this, 16);
-                }
-            }
-        });
     }
 }

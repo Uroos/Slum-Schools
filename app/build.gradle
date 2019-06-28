@@ -1,12 +1,15 @@
 apply plugin: 'com.android.application'
 
+
 android {
     signingConfigs {
         config {
-            keyAlias 'key0'
-            keyPassword 'password'
-            storeFile file("${rootDir}/keystore.jks")
-            storePassword 'password'
+            def Properties localProps = new Properties()
+            localProps.load(new FileInputStream(file('../local.properties')))
+            storeFile file(localProps["store"])
+            keyAlias localProps["alias"]
+            storePassword localProps["storePass"]
+            keyPassword localProps["pass"]
         }
     }
     compileSdkVersion 28
@@ -48,6 +51,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
     implementation 'com.google.firebase:firebase-ads:16.0.1'
+    implementation 'com.hbb20:ccp:2.2.4'
+    implementation 'com.rom4ek:arcnavigationview:1.0.3'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

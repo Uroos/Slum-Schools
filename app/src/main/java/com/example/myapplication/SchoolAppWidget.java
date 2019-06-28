@@ -52,6 +52,7 @@ public class SchoolAppWidget extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, null, appWidgetId);
         }
     }
+
     public static void updateSchoolWidgets(Context context, AppWidgetManager appWidgetManager,
                                            School school, int[] appWidgetIds) {
 
@@ -59,6 +60,7 @@ public class SchoolAppWidget extends AppWidgetProvider {
             updateAppWidget(context, appWidgetManager, school, appWidgetId);
         }
     }
+
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created

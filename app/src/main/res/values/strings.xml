@@ -61,6 +61,10 @@
     <string name="key_dayto">dayto</string>
     <integer name="duration">450</integer>
 
+    <string name="facebook_app_id">437900580111947</string>
+    <string name="fb_login_protocol_scheme">fb437900580111947</string>
+    <string name="menu_item_delete">Delete</string>
+
     <!--Spinner resource-->
     <string-array name="days_array">
         <item>Monday</item>
