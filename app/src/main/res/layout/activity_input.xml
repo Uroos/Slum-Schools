@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context="InputActivity">
-
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarInput"
@@ -27,201 +26,207 @@
             android:id="@+id/tvInputName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_32"
             android:text="@string/tv_name_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edInputName"
-            app:layout_constraintEnd_toStartOf="@+id/edInputName"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarInput"
             tools:text="@string/tv_name_label" />
 
         <EditText
             android:id="@+id/edInputName"
             android:layout_width="0dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="@dimen/margin_16"
+            android:autofillHints="My School Name"
             android:ems="10"
             android:inputType="textPersonName"
             android:maxLength="30"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvInputName"
+            app:layout_constraintTop_toBottomOf="@+id/tvInputName" />
 
         <TextView
             android:id="@+id/tvInputAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_24"
             android:text="@string/tv_address_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edInputAddress"
-            app:layout_constraintEnd_toStartOf="@+id/edInputAddress"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvInputName"
+            app:layout_constraintStart_toStartOf="@+id/edInputName"
+            app:layout_constraintTop_toBottomOf="@+id/edInputName"
             tools:text="@string/tv_address_label" />
 
         <EditText
             android:id="@+id/edInputAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:autofillHints="St. 1, Palm Residences, City"
             android:inputType="textMultiLine"
             android:maxLength="60"
             android:maxLines="3"
             android:scrollbars="vertical"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edInputName" />
+            app:layout_constraintStart_toStartOf="@+id/tvInputAddress"
+            app:layout_constraintTop_toBottomOf="@+id/tvInputAddress" />
 
         <TextView
             android:id="@+id/tvInputEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_24"
             android:text="@string/tv_email_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edInputEmail"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/edInputAddress"
+            app:layout_constraintTop_toBottomOf="@+id/edInputAddress"
             tools:text="@string/tv_email_label" />
 
         <EditText
             android:id="@+id/edInputEmail"
             android:layout_width="0dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:autofillHints="abc@email.com"
             android:inputType="textEmailAddress"
             android:maxLength="30"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edInputAddress" />
+            app:layout_constraintStart_toStartOf="@+id/tvInputEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tvInputEmail" />
 
         <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginEnd="@dimen/margin_8"
             android:text="@string/tv_dayopen_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/edInputEmail"
+            app:layout_constraintTop_toBottomOf="@+id/edInputEmail"
             tools:text="@string/tv_dayopen_label" />
 
         <Spinner
             android:id="@+id/spinnerFrom"
-            android:layout_width="110dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/margin_8"
-            app:layout_constraintBottom_toBottomOf="@+id/spinnerTo"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_width="130dp"
+            android:layout_height="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_16"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
             android:text="@string/tv_to_label"
             app:layout_constraintBottom_toBottomOf="@+id/spinnerFrom"
             app:layout_constraintEnd_toStartOf="@+id/spinnerTo"
             app:layout_constraintStart_toEndOf="@+id/spinnerFrom"
             app:layout_constraintTop_toTopOf="@+id/spinnerFrom"
-            app:layout_constraintVertical_bias="0.523"
             tools:text="@string/tv_to_label" />
 
         <Spinner
             android:id="@+id/spinnerTo"
-            android:layout_width="110dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_width="130dp"
+            android:layout_height="@dimen/margin_40"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/tvInputStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_8"
-            android:layout_marginRight="@dimen/margin_8"
             android:text="@string/tv_starttime_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edStartTime"
-            app:layout_constraintEnd_toStartOf="@+id/edStartTime"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvInputEmail"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvInputEndTime"
+            app:layout_constraintStart_toStartOf="@+id/spinnerFrom"
             tools:text="@string/tv_starttime_label" />
 
         <EditText
             android:id="@+id/edStartTime"
-            android:layout_width="@dimen/ed_time_width"
+            android:layout_width="96dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="@dimen/margin_8"
+            android:autofillHints="00:00AM"
             android:focusable="false"
             android:inputType="time"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerFrom" />
+            app:layout_constraintBottom_toBottomOf="@+id/imgbtnTimeStart"
+            app:layout_constraintStart_toStartOf="@+id/tvInputStartTime"
+            app:layout_constraintTop_toTopOf="@+id/imgbtnTimeStart"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tvInputEndTime"
-            android:layout_width="wrap_content"
+            android:layout_width="56dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_8"
-            android:layout_marginRight="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginEnd="108dp"
             android:text="@string/tv_endtime_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edEndTime"
-            app:layout_constraintEnd_toStartOf="@+id/edEndTime"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvInputStartTime"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTo"
             tools:text="@string/tv_endtime_label" />
 
         <EditText
             android:id="@+id/edEndTime"
-            android:layout_width="@dimen/ed_time_width"
+            android:layout_width="96dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:autofillHints="00:00AM"
             android:focusable="false"
             android:inputType="time"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edStartTime" />
+            app:layout_constraintStart_toStartOf="@+id/tvInputEndTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvInputEndTime" />
 
         <TextView
             android:id="@+id/tvInputPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_24"
             android:text="@string/tv_phone_label"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edPhone"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/edStartTime"
+            app:layout_constraintTop_toBottomOf="@+id/edStartTime"
             tools:text="@string/tv_phone_label" />
 
         <EditText
             android:id="@+id/edPhone"
             android:layout_width="0dp"
             android:layout_height="@dimen/input_activity_edit_text_height"
-            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginTop="@dimen/margin_16"
+            android:autofillHints="123456789"
             android:inputType="phone"
             android:maxLength="30"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/edEndTime" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/tvInputPhone"
+            app:layout_constraintTop_toBottomOf="@+id/tvInputPhone" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
+            app:layout_constraintGuide_begin="@dimen/margin_16" />
 
         <Button
             android:id="@+id/btnInputSave"
             style="@style/InputImageButtonSave"
-            android:layout_marginTop="56dp"
+            android:layout_width="0dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="@dimen/margin_32"
             android:contentDescription="@string/btn_save"
             android:onClick="save"
             android:text="@string/btn_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/edPhone"
-            app:layout_constraintVertical_bias="0.895"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Save" />
 
         <android.support.constraint.Guideline
@@ -241,27 +246,20 @@
         <ImageButton
             android:id="@+id/imgbtnTimeStart"
             style="@style/InputImageButtonTime"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="@dimen/margin_16"
             android:contentDescription="@string/tv_starttime_label"
             android:src="@drawable/ic_access_time_black_24dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintStart_toEndOf="@+id/edStartTime"
-            app:layout_constraintTop_toBottomOf="@+id/edInputEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/tvInputStartTime" />
 
         <ImageButton
             android:id="@+id/imgbtnTimeEnd"
             style="@style/InputImageButtonTime"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginBottom="@dimen/margin_8"
             android:contentDescription="@string/tv_endtime_label"
             android:src="@drawable/ic_access_time_black_24dp"
-            app:layout_constraintBottom_toTopOf="@+id/edPhone"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintBottom_toBottomOf="@+id/edEndTime"
             app:layout_constraintStart_toEndOf="@+id/edEndTime"
-            app:layout_constraintTop_toBottomOf="@+id/imgbtnTimeStart" />
+            app:layout_constraintTop_toTopOf="@+id/edEndTime"
+            app:layout_constraintVertical_bias="1.0" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.uroos.myapplication">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -20,9 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".SchoolUpdateService" />
+        <service android:name="com.uroos.myapplication.SchoolUpdateService" />
 
-        <receiver android:name=".SchoolAppWidget">
+        <receiver android:name="com.uroos.myapplication.SchoolAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -44,14 +44,14 @@
             android:value="@string/google_maps_key" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="[ca-app-pub-7680180921711744~8820543312]" />
+            android:value="[ca-app-pub-7680180921711744~8267394379]" />
 
         <activity
-            android:name=".EnterActivity"
+            android:name="com.uroos.myapplication.EnterActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.uroos.myapplication.MapsActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.Launcher">
@@ -62,19 +62,19 @@
         </activity>
 
         <activity
-            android:name=".DetailActivity"
+            android:name="com.uroos.myapplication.DetailActivity"
             android:label="Detail Screen"
             android:launchMode="singleTask"
-            android:parentActivityName=".MapsActivity" />
+            android:parentActivityName="com.uroos.myapplication.MapsActivity" />
         <activity
-            android:name=".InputActivity"
+            android:name="com.uroos.myapplication.InputActivity"
             android:label="Input Screen"
             android:launchMode="singleTask"
-            android:parentActivityName=".MapsActivity" />
+            android:parentActivityName="com.uroos.myapplication.MapsActivity" />
         <activity
-            android:name=".AboutActivity"
+            android:name="com.uroos.myapplication.AboutActivity"
             android:launchMode="singleTask"
-            android:parentActivityName=".MapsActivity" />
+            android:parentActivityName="com.uroos.myapplication.MapsActivity" />
     </application>
 
 </manifest>

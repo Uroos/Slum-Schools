@@ -41,5 +41,6 @@
     <dimen name="margin_56">56dp</dimen>
     <dimen name="nav_drawer_elevation">16dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
 
 </resources>

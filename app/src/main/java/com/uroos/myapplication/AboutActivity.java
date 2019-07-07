@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.uroos.myapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;

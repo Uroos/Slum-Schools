@@ -1,4 +1,4 @@
-package com.example.myapplication.utils;
+package com.uroos.myapplication.utils;
 
 import android.content.Context;
 import android.graphics.Point;

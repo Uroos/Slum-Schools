@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.uroos.myapplication;
 
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -22,7 +22,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.myapplication.model.School;
+import com.uroos.myapplication.model.School;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.myapplication.utils.Utils.isOnline;
+import static com.uroos.myapplication.utils.Utils.isOnline;
 
 public class InputActivity extends AppCompatActivity {
     private String userId;

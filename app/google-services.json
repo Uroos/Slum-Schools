@@ -1,54 +1,56 @@
 {
   "project_info": {
-    "project_number": "60660727751",
-    "firebase_url": "https://slumschools-e12cf.firebaseio.com",
-    "project_id": "slumschools-e12cf",
-    "storage_bucket": "slumschools-e12cf.appspot.com"
+    "project_number": "957187749076",
+    "firebase_url": "https://slum-schools-new-package.firebaseio.com",
+    "project_id": "slum-schools-new-package",
+    "storage_bucket": "slum-schools-new-package.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:60660727751:android:13c3c6a65bcbec53",
+        "mobilesdk_app_id": "1:957187749076:android:3184cb75b740f0b4",
         "android_client_info": {
-          "package_name": "com.example.myapplication"
+          "package_name": "com.uroos.myapplication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "60660727751-vaaflnjt7da707h0e5pm4a76smdfhvli.apps.googleusercontent.com",
+          "client_id": "957187749076-cs31qf0ut8j4lgud8bats120lldbd3ht.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.myapplication",
+            "package_name": "com.uroos.myapplication",
+            "certificate_hash": "d23b4d958446929fa427a55c68fb32a522fc39ee"
+          }
+        },
+        {
+          "client_id": "957187749076-fpusm6621ug49b0356nrfgq4tp1gt91p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uroos.myapplication",
             "certificate_hash": "079d2597e4af92d9aa20fb5eb12460e496a80415"
           }
         },
         {
-          "client_id": "60660727751-6apnfjalciqsne0161mqc1qtkvfej3uc.apps.googleusercontent.com",
+          "client_id": "957187749076-uc28em00767u1mlfmluv0men9i36pgkg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwkMz2ZMOrOYouvnoFBnINQvOW7BwUksU"
+          "current_key": "AIzaSyB5U2FiXsY2SEbLXuDBfLdazIwFgI1dPNQ"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "60660727751-6apnfjalciqsne0161mqc1qtkvfej3uc.apps.googleusercontent.com",
+              "client_id": "957187749076-uc28em00767u1mlfmluv0men9i36pgkg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-7680180921711744~8267394379"
     }
   ],
   "configuration_version": "1"

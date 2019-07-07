@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.uroos.myapplication;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.model.School;
+import com.uroos.myapplication.model.School;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -19,8 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.myapplication.utils.Utils.body;
-import static com.example.myapplication.utils.Utils.subject;
+import static com.uroos.myapplication.utils.Utils.body;
+import static com.uroos.myapplication.utils.Utils.subject;
 
 public class DetailActivity extends AppCompatActivity {
     private String name;
@@ -31,6 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     private String startTime;
     private String endTime;
     private String phone;
+
     private AdView mAdView;
 
     @BindView(R.id.tvDetailName)
@@ -56,10 +57,9 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        // Use this for testing purpose "ca-app-pub-3940256099942544/6300978111"
-        // My personal id "ca-app-pub-7680180921711744~8820543312"
-        // Change here and in xml and in manifest
-        MobileAds.initialize(this, "ca-app-pub-7680180921711744~8820543312");
+
+        // Following app id goes only in .java and manifest
+        MobileAds.initialize(this, "ca-app-pub-7680180921711744~8267394379");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.uroos.myapplication;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.myapplication.model.School;
+import com.uroos.myapplication.model.School;
 
 public class SchoolUpdateService extends IntentService {
 

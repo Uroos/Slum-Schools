@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.uroos.myapplication;
 
 import android.Manifest;
 import android.content.Intent;
@@ -18,14 +18,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.model.School;
+import com.uroos.myapplication.model.School;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -57,8 +56,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.myapplication.utils.Utils.isOnline;
-import static com.example.myapplication.utils.Utils.startDropMarkerAnimation;
+import static com.uroos.myapplication.utils.Utils.isOnline;
+import static com.uroos.myapplication.utils.Utils.startDropMarkerAnimation;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,

@@ -1,6 +1,5 @@
-package com.example.myapplication;
+package com.uroos.myapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
-
-import static java.security.AccessController.getContext;
 
 public class EnterActivity extends AppCompatActivity {
     CountryCodePicker ccp;
