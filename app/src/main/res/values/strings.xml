@@ -75,5 +75,9 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">429578614297153</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb429578614297153</string>
 </resources>
 
