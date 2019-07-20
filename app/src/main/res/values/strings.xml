@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Slum Schools</string>
     <string name="title_activity_maps">Map</string>
-    <string name="add_marker">Add a location</string>
+    <string name="add_marker">Add your school</string>
     <string name="about">About</string>
+    <string name="privacy_url">https://uroosfatima.wixsite.com/androiddeveloper/privacy-policy</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -79,5 +80,6 @@
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">429578614297153</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb429578614297153</string>
+    <string name="privacy">Privacy</string>
 </resources>
 

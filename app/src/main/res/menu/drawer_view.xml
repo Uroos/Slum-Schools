@@ -10,6 +10,9 @@
             android:id="@+id/log_out"
             android:title="@string/logout" />
         <item
+            android:id="@+id/privacy"
+            android:title="@string/privacy" />
+        <item
             android:id="@+id/nav_about"
             android:title="@string/about" />
     </group>

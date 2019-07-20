@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,12 +19,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.uroos.myapplication.model.School;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -99,6 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     TextView tvErrorMessage;
 
     SupportMapFragment mapFragment;
+    PlaceAutocompleteFragment placeAutoComplete;
 
     SharedPreferences sharedPref;
     String chosenCountry = "Pakistan";
@@ -529,6 +536,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
                     Toast.makeText(this, "You are logged out already.", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.privacy:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.privacy_url)));
+                startActivity(browserIntent);
                 break;
         }
         // close drawer when item is tapped
