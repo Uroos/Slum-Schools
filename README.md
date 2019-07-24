@@ -10,3 +10,14 @@ You can click on a marker to retrieve details about the school including name, t
 If you want to add your school to the map then you must login and fill in the required information.
 
 All information is stored online and authentication is done via Firebase. 
+
+<img src="https://github.com/Uroos/Slum-Schools/blob/master/Screenshot_1562424863.png" width="200" height="300" />
+
+<img src="https://github.com/Uroos/Slum-Schools/blob/master/Screenshot_1562424974.png" width="200" height="300" />
+
+<img src="https://github.com/Uroos/Slum-Schools/blob/master/Screenshot_1562424988.png" width="200" height="300" />
+
+<img src="https://github.com/Uroos/Slum-Schools/blob/master/Screenshot_1562425244.png" width="200" height="300" />
+
+<img src="https://github.com/Uroos/Slum-Schools/blob/master/Screenshot_1562425268.png" width="200" height="300" />
+
